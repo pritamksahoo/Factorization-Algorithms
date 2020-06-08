@@ -82,15 +82,28 @@ if __name__ == '__main__':
 	x = [num**0.5 - a_arr[0]]
 	b_init = 1
 
+	print("\nInitialization : -")
+	print("a0 = b0 =", a_arr[0])
+	print("b(-1) = 1")
+	print("x0 = x - a0 =", x[0], "\n")
+	print("Now, creating suitable b-values (Using formulas, a(i) = [1/x(i-1)]; b(i) = a(i)*b(i-1) + b(i-2) (mod n); x[i] = 1/x(i-1) - a(i)) : \n")
+	print("    k    ak    bk       xk")
+
 	while not done:
+		print("%5d" % (k), end="")
+
 		a_arr.append(int(1/x[k-1]))
+		print("%6d" % (a_arr[k]), end="")
 
 		if k == 1:
 			b_arr.append((a_arr[k]*b_arr[k-1] + b_init) % num)
 		else:
 			b_arr.append((a_arr[k]*b_arr[k-1] + b_arr[k-2]) % num)
+		print("%6d" % (b_arr[k]), end="")
 
 		x.append(1/x[k-1] - a_arr[k])
+		print("%9.5f" % (x[k]), "\n-------------------------------------")
+
 		b1, k = b_arr[k], k + 1
 		#print(b1, b2)
 		r1 = lar(b1, num)
